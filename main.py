@@ -3,7 +3,7 @@ import requests
 from g4f.client import Client
 app = Flask(__name__)
 
-YOUTUBE_API_KEY ='AIzaSyD69Tkn6khJDXVP7VnLeojHi4ez56d0TEA'
+YOUTUBE_API_KEY ="YOUR_YOUTUBE_API_KEY"
 
 def fetch_response(input):
     messages = [{"role": "user", "content": f"suggest me some english resources (like books and websites) for {input}.review before returning!"}]
