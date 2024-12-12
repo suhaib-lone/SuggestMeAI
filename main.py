@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request
 import requests
 from g4f.client import Client
+from dotenv import load_dotenv
+import os
 app = Flask(__name__)
-
-YOUTUBE_API_KEY ='AIzaSyD69Tkn6khJDXVP7VnLeojHi4ez56d0TEA'
+load_dotenv()
+YOUTUBE_API_KEY =os.getenv('yt_api')
 
 def fetch_response(input):
     messages = [{"role": "user", "content": f"suggest me some english resources (like books and websites) for {input}.review before returning!"}]
