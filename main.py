@@ -11,7 +11,8 @@ def fetch_response(input):
     messages = [{"role": "user", "content": f"suggest me some english resources (like books and websites) for {input}.review before returning!"}]
     client = Client()
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o"
+        "-mini",
         messages=messages,
     )
     return response.choices[0].message.content
