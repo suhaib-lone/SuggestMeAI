@@ -3,94 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>SuggestMe</title>
+  <title>{{ app_title }}</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@400;600;700;800&display=swap');
+
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --border: #2b313c;
+      --text: #f3f6fb;
+      --muted: #9aa4b2;
+      --accent: #7dd3fc;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+    }
+
     * {
-      font-family: "Teachers", sans-serif;
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
+
     body {
-      font-family: "Teachers", sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
-      background-color: #ffffff;
-      }
-      #wmessage {
-        font-weight: 700;
-        text-align: center;
-        font-size: 40px;
-        font-family: Hack, sans-serif;
-        text-transform: uppercase;
-        background: linear-gradient(90deg, #ffffff, #000000, #ffffff);
-        letter-spacing: 5px;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-repeat: no-repeat;
-        background-size: 80%;
-        animation: shine 5s linear infinite;
-        position: relative;
-    }
-    @keyframes shine {
-      0% {
-        background-position-x: -500%;
-      }
-      100% {
-        background-position-x: 500%;
-      }
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #0b0f14 0%, var(--bg) 100%);
+      padding: 24px;
+      display: grid;
+      place-items: center;
     }
 
+    .hero {
+      width: min(980px, 100%);
+      padding: 48px;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
 
-    #generator {
-      background-color: #ffffff;
-      border-width: 1px;
-      padding: 10PX;
-      font-size: 50px;
-      color: #000000;
-      height: 100px; 
-      background-repeat: no-repeat;
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(125, 211, 252, 0.08);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin-top: 22px;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(3rem, 8vw, 5.6rem);
+      line-height: 0.95;
+      max-width: 760px;
+    }
+
+    .lead {
+      margin-top: 18px;
+      max-width: 620px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .actions {
+      margin-top: 30px;
       display: flex;
-      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
       align-items: center;
-      background-repeat: no-repeat;
-      box-shadow: -10px 2px 16px 0px rgba(178,168,168,1);
-      background-size: 300% 100%;
-      transition: transform 0.5s ease;
     }
-    #generator:hover {
-      background: linear-gradient(90deg, #ffffff, #f9f5f5, #fef9f9);      
+
+    .cta {
+      min-height: 56px;
+      padding: 0 22px;
+      border: none;
+      border-radius: 999px;
+      background: var(--text);
+      color: #0b0f14;
+      font: inherit;
+      font-weight: 700;
       cursor: pointer;
-      transform: scale(1.07);
+      transition: transform 180ms ease;
     }
 
-  </style>
+    .cta:hover {
+      transform: translateY(-2px);
+    }
 
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 28px;
+        border-radius: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <p id="wmessage">WELCOME TO SUGGESTME.AI</p>
-  <div class="generate" style="display: none;">
-    <form id="generate-form" method="post" action="/generate">
-      <button id="generator" type="submit">LET'S GENERATE RESOURCES FOR YOU</button>
-    </form>
-  </div>
-
-
-
-  <script>
-    let paragraph = document.getElementsByTagName('p')[0]; 
-    let generate=document.getElementsByClassName('generate');
-    let generator=document.getElementById('generator');
-    setTimeout(function() {
-      paragraph.style.display = 'none'; 
-      generator.classList.add("show");
-      generate[0].style.display = 'block';
-    }, 5000); 
-
-  </script>
+  <main class="hero">
+    <span class="eyebrow">SuggestMe.AI</span>
+    <h1>Better suggestions, with less noise.</h1>
+    <p class="lead">
+      Ask for an idea, tool, resource, or learning path and get a focused AI-generated answer in one clean thread.
+    </p>
+    <div class="actions">
+      <form method="get" action="/generate">
+        <button class="cta" type="submit">Start</button>
+      </form>
+      <span class="meta">{{ selected_model }}</span>
+    </div>
+  </main>
+</body>
 </html>
